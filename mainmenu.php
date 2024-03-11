@@ -88,7 +88,7 @@
 
         main {
             
-            padding-top: 900px;
+            padding-top: 700px;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -100,7 +100,7 @@
 
         main h1 {
             font-size: 50px;
-            margin-bottom: 10px;
+            margin-bottom: 2px;
         }
 
         main h4 {
