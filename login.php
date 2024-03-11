@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $row['res_pass'])) {
             // Password is correct, redirect to dashboard
             $_SESSION['username'] = $username;
-            header("./Github_Repository/Group_Skyline_Airways/dashboard.php");
+            header("/Github_Repository/Group_Skyline_Airways/mainmenu.php");
             exit();
         } else {
             // Incorrect password
@@ -45,11 +45,11 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     background-size: cover;
-     background-repeat: no-repeat;
+    background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
     margin: 0;
-     overflow-x: hidden;
+    overflow-x: hidden;
 }
 main {
     display: flex;
@@ -182,7 +182,7 @@ nav ul li a {
                 <?php if(isset($errorMessage)): ?>
                     <p id="errorMessage" style="text-align: center; margin-top: 10px; color: red;"><?php echo $errorMessage; ?></p>
                 <?php endif; ?>
-                <p style="text-align: center;"><a href="./registration.php">No account? register here</a>.</p>
+                <p style="text-align: center;"><a href="/Github_Repository/Group_Skyline_Airways/registration.php">No account? register here</a>.</p>
             </form>
         </div>
     </main>

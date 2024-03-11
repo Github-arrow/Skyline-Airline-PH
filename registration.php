@@ -1,9 +1,7 @@
 <?php
 include_once './config/database.php';
 
-$errorMessage = ''; 
-
-// Initialize error message variable
+$errorMessage = ''; // Initialize error message variable
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
@@ -14,13 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirm_password = $_POST['confirm_password'];
 
     // Check if password and confirm password match
-
     if ($password !== $confirm_password) {
         $errorMessage = "Passwords do not match.";
     } else {
-
         // Check if email is already taken
-        $stmt = $conn->prepare("SELECT * FROM registration WHERE res_email = ?");
+        $stmt = $conn->prepare("SELECT * FROM res_records WHERE res_email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -28,24 +24,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows > 0) {
             $errorMessage = "Email already exists.";
         } else {
-
             // Hash the password before storing it
-
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
             // Prepare and bind the SQL statement
-
-            $stmt = $conn->prepare("INSERT INTO registration (res_fname, res_lname, res_email, res_pass) VALUES (?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO res_records (res_fname, res_lname, res_email, res_pass) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("ssss", $first_name, $last_name, $email, $hashed_password);
 
             // Execute the statement
-
             if ($stmt->execute()) {
                 // Registration successful, redirect to login page
-                header("./Github_Repository/Group_Skyline_airways/login.php");
+                header("Location: /login.php");
                 exit();
             } else {
-
                 // Registration failed
                 $errorMessage = "Error: " . $stmt->error;
             }
@@ -140,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php if(isset($errorMessage)): ?>
                 <p style="color: red;"><?php echo $errorMessage; ?></p>
             <?php endif; ?>
-            <p style="margin-top: 10px;"><a href="./login.php">Back to login</a></p>
+            <p style="margin-top: 10px;"><a href="/Github_Repository/Group_Skyline_Airways/login.php">Back to login</a>.</p>
         </form>
     </div>
     <script>
